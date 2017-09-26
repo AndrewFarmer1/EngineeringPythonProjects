@@ -80,7 +80,6 @@ def monster_damage_calculator(monster):
     elif monster == "goblin":
         monster_damage = random.randint(0,3)
 def main():
-    # TODO : Randomly pick which monster the player will face this game. Set the result equal to the variable 'monster'.
     monster = random.randint(1,3)
     if monster == 1:
         monster = "goblin"
@@ -89,35 +88,32 @@ def main():
     elif monster == 3:
         monster = "dragon"
 
+
+    return main(monster)
 print("A " + str(monster) + " has appeared before you! It looks angry.")
-#blablabla
 choice = None
 while (choice is None):
-        # TODO : Ask the player what they want to do. Their options are 'fight' and 'run'. Set the player's choice equal to the variable 'choice'.
-    choice = input("Will you run or fight? >>>")
-    if choice not in ["fight", "run"]:
-        print ("I didn't understand that...")
-    choice = None
+        if choice != "fight" or "run":
+            print ("I didn't understand that...")
 
     # TODO : Exit the program if the player chose to run away. Otherwise, wish them luck in their fight.
-    if choice == "run":
-        print ("Coward!!!")
-        exit()
-    elif choice == "fight":
+if choice == "run":
+    print ("Coward!!!")
+    exit()
+elif choice == ("fight"):
         print("Best of luck to you adventurer!")
     # TODO : Set the monster's starting health by calling your function
-    monster_health = health_setter(monster)
+monster_health    =       health_setter(monster)
     # TODO : Set the player's starting health to 10
-    player_health = 10
+player_health = 10
     # Turn iterator
-    while monster_health > 0 and player_health > 0:
+while monster_health > 0 and player_health > 0:
+    weapon = None
+    while (weapon is None):
+        raw_input("Will you use sword, bow, or magic>>>")
+        if weapon not in weapons:
+            print ("I didn't understand that...")
         weapon = None
-        while (weapon is None):
-            # TODO : Ask the player what weapon they will use to attack the monster. Their options are 'sword', 'bow', and 'magic'. Set the player's choice equal to the variable 'weapon'.
-            input("Will you use sword, bow, or magic>>>")
-            if weapon not in weapons:
-                print ("I didn't understand that...")
-                weapon = None
 
         # TODO : Randomly pick where the player will attack the monster. Set the result equal to the variable 'target'.
     number = random.randint(1,3)
