@@ -4,6 +4,7 @@ import random
 monster = ["goblin", "ghost", "dragon"]
 weapon = ["sword", "bow", "magic"]
 target = ["head", "body", "random"]
+choice = ["fight", "run"]
 # TODO : Create a function that gives you the health of a monster. It should take in a monster as a parameter and return the amount of health it starts with.
 def health_setter(monster):
     if monster == "goblin":
@@ -79,7 +80,7 @@ def monster_damage_calculator(monster):
         monster_damage =random.randint(0,5)
     elif monster == "goblin":
         monster_damage = random.randint(0,3)
-def main():
+def main(monster, weapon, target, choice):
     monster = random.randint(1,3)
     if monster == 1:
         monster = "goblin"
@@ -87,34 +88,32 @@ def main():
         monster = "ghost"
     elif monster == 3:
         monster = "dragon"
-
-
-    return main(monster)
-print("A " + str(monster) + " has appeared before you! It looks angry.")
-choice = None
-while (choice is None):
-        if choice != "fight" or "run":
+    print("A " + str(monster) + " has appeared before you! It looks angry.")
+    global Choice
+    choice = None
+    while (choice is None):
+        choice = raw_input("Would you like to fight or run>>>? ")
+        if choice not in ["fight","run"]:
             print ("I didn't understand that...")
-
+        if choice not in ["fight", "run"]:
+           choice = None
     # TODO : Exit the program if the player chose to run away. Otherwise, wish them luck in their fight.
-if choice == "run":
-    print ("Coward!!!")
-    exit()
-elif choice == ("fight"):
+    if choice == "run":
+        print("Coward!!!")
+        exit()
+    elif choice == ("fight"):
         print("Best of luck to you adventurer!")
     # TODO : Set the monster's starting health by calling your function
-monster_health    =       health_setter(monster)
+    monster_health    =   health_setter(monster)
     # TODO : Set the player's starting health to 10
-player_health = 10
-    # Turn iterator
-while monster_health > 0 and player_health > 0:
-    weapon = None
+    player_health = 10
+    print("You have " + str(player_health) + " health and the monster has " + str(monster_health) + " health.")
+    while monster_health > 0 and player_health > 0:
+        weapon = None
     while (weapon is None):
         raw_input("Will you use sword, bow, or magic>>>")
-        if weapon not in weapons:
+        if weapon not in ["sword", "bow", "magic"]:
             print ("I didn't understand that...")
-        weapon = None
-
         # TODO : Randomly pick where the player will attack the monster. Set the result equal to the variable 'target'.
     number = random.randint(1,3)
     if number == 1:
@@ -133,11 +132,11 @@ while monster_health > 0 and player_health > 0:
         # TODO : Deal damage to the player.
     player_health =  player_health - damage
         # TODO : Inform the player of their health and the monster's health at the end of every turn
-print("The monster has " + int(monster_health) + " health.")
-print("You have " + int(player_health) + " health." )
+    print("The monster has " + int(monster_health) + " health.")
+    print("You have " + int(player_health) + " health." )
     # TODO : Display either a game over or victory message once either the player or the monster has run out of health
-if monster_health == 0:
-   print("Congratulations")
-elif player_health == 0:
-    print ("You have died, better luck next time mate. ")
-main()
+    if monster_health == 0:
+        print("Congratulations")
+    elif player_health == 0:
+        print ("You have died, better luck next time mate. ")
+main(monster, weapon, target, choice)
