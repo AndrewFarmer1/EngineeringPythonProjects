@@ -3,7 +3,7 @@ from time import sleep
 
 # TODO : Create lists for the monsters, weapons, and targets.
 monster = ["goblin", "ghost", "dragon"]
-weapon = ["sword", "bow", "magic"]
+weapon = ["sword", "bow", "magic", "healing potion"]
 target = ["head", "body", "random"]
 choice = ["fight", "run"]
 # TODO : Create a function that gives you the health of a monster. It should take in a monster as a parameter and return the amount of health it starts with.
@@ -84,6 +84,9 @@ def monster_damage_calculator(monster):
         monster_damage = random.randint(0,3)
     return monster_damage
 def main(monster, weapon, target, choice):
+    name = raw_input("Please tell me your name>>>")
+    print("Well hello there %s. I am pleased to meet you, I am the narrator of your soon to be great adventure.") %name
+    sleep(1)
     monster = random.randint(1,3)
     if monster == 1:
         monster = "goblin"
@@ -119,18 +122,33 @@ def main(monster, weapon, target, choice):
     while monster_health > 0 and player_health > 0:
         weapon = None
         while (weapon is None):
-            weapon = raw_input("Will you use sword, bow, or magic?>>>")
-            if weapon not in ["sword", "bow", "magic"]:
+            weapon = raw_input("Will you use a sword, bow, magic or healing potion?>>>")
+            if weapon not in ["sword", "bow", "magic", "healing potion","konami"]:
                 print ("I didn't understand that...")
-            if weapon not in ["sword", "bow", "magic"]:
+            if weapon not in ["sword", "bow", "magic", "healing potion","konami"]:
                 weapon = None
             if weapon == "sword":
-                print("You chose the sword a mighty fine weapon for a coward")
+                print("You chose the sword a mighty fine weapon.")
             if weapon == "bow":
                 print("An archer, I see falling foes down from afar.")
             if weapon == "magic":
                 print("Oh boy I love card tricks. Are you like David Blaine or Chris angle???")
-    
+            if weapon == "healing potion":
+                player_health = player_health + random.randint(1,9)
+                damage = monster_damage_calculator(monster)
+                print ("After healing you have %d health") % player_health
+                print("A the best offense is a good defense")
+                print ("The monster did %d damage to you") % damage
+                player_health = player_health - damage
+                print ("You now have %d health") %player_health
+                if player_health > 0:
+                    weapon = None
+            if weapon == "konami":
+                monster_health = 0
+                weapon = None
+                if monster_health <= 0:
+                    print("Congratulations you have successfully murdered an innocent %s in cold blood. I hope you are happy with yourself when prompted to pick weapon choose any option.") % monster
+                
         number = random.randint(1,3)
         if number == 1:
             target = "head"
@@ -139,7 +157,7 @@ def main(monster, weapon, target, choice):
         elif number == 3:
             target = "random"
         if number == number:
-            print("You did %d damage, do not give up!!!") % number
+            print("You did %d damage!!!") % number
             sleep(1)
         # TODO : Randomly pick where the player will attack the monster. Set the result equal to the variable 'target'.
         # TODO : Set the amount of damage the player will deal to the monster by calling your function
@@ -165,5 +183,15 @@ def main(monster, weapon, target, choice):
             print("Congratulations you have successfully murdered an innocent %s in cold blood. I hope you are happy with yourself") % monster
         elif player_health <= 0:
             print ("You have died, better luck next time mate. You got rekted by a %s man. ") %monster
-        
 main(monster, weapon, target, choice)
+answer = None
+while answer == None:
+    answer = raw_input("Would you like to play again?>>>")
+    if answer not in ["yes","no"]:
+        print("I am sorry I do not understand.")
+        answer =  None
+    if answer in ["yes", "no"]:
+        if answer == "yes":
+            main(monster,weapon,target,choice)
+        if answer == "no":
+            exit()
